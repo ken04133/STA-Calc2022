@@ -21,7 +21,7 @@
         #display{
             background-color: white;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 16px;
         }
     </style>
     <script>
@@ -45,11 +45,13 @@
                }
                if(x.value == "AC"){
                     error = false;
+                    FormulaString = "";
                     display.value = "";
                     return;
                }
                if(error == true){
                     display.value = "";
+                    FormulaString = "";
                     error = false;
                }
                FormulaString += x.value;
