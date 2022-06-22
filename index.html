@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <mata charset="UTF-8"></mata>
+        <title>計算機</title>
+    </head>
+    <style>
+        input{
+            width: 220px;
+            height: 80px;
+        }
+        button{
+            width: 50px;
+            height: 50px;
+            border: none;
+            background-color: aqua;  
+            border-radius: 50%;
+        }
+        button:hover{
+            background-color: rgb(0, 155, 155); 
+        }
+        #display{
+            background-color: white;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        let error = false;
+        let FormulaString = "";
+        function keisan(x){
+               if(x.value == "="){
+                try {
+                    display.value = FormulaString +" = "+ eval(display.value);
+                    FormulaString = "";
+                    if(display.value == "undefined"){
+                        error = true;
+                        display.value = "式を入力して下さい";
+                     }
+                    return;
+                } catch(e) {
+                    error = true;
+                    display.value = "正しい式を入力して下さい";
+                    return;
+                }
+               }
+               if(x.value == "AC"){
+                    error = false;
+                    display.value = "";
+                    return;
+               }
+               if(error == true){
+                    display.value = "";
+                    error = false;
+               }
+               FormulaString += x.value;
+               x.value = x.value.replace(/÷/g, '/');
+               x.value = x.value.replace(/×/g, '*');
+               display.value += x.value; 
+            }
+            document.addEventListener('keypress', keypress_ivent);
+            function keypress_ivent(e) {
+                display.value += e.key;
+	            return false; 
+            }        
+    </script>
+    <body>
+        <table id="keisan">
+            <tr>
+                <td colspan="4">
+                    <input type="text" id="display" value="" disabled>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button value="(" onclick="keisan(this)">(</button>
+                </td>
+                <td>
+                    <button value=")" onclick="keisan(this)">)</button>
+                </td>
+                <td>
+                    <button value="%" onclick="keisan(this)">%</button>
+                </td>
+                <td>
+                    <button value="AC" onclick="keisan(this)">AC</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button value="1" onclick="keisan(this)">1</button>
+                </td>
+                <td>
+                    <button value="2" onclick="keisan(this)">2</button>
+                </td>
+                <td>
+                    <button value="3" onclick="keisan(this)">3</button>
+                </td>
+                <td>
+                    <button value="÷" onclick="keisan(this)">÷</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button value="4" onclick="keisan(this)">4</button>
+                </td>
+                <td>
+                    <button value="5" onclick="keisan(this)">5</button>
+                </td>
+                <td>
+                    <button value="6" onclick="keisan(this)">6</button>
+                </td>
+                <td>
+                    <button value="×" onclick="keisan(this)">×</button>
+                </td>
+            </tr>
+        <tr>                
+            <td>
+                <button value="7" onclick="keisan(this)">7</button>
+            </td>
+            <td>
+                <button value="8" onclick="keisan(this)">8</button>
+            </td>
+            <td>
+                <button value="9" onclick="keisan(this)">9</button>
+            </td>
+            <td>
+                <button value="-" onclick="keisan(this)">-</button>
+            </td>
+        </tr>
+        <tr>                
+            <td>
+                <button value="0" onclick="keisan(this)">0</button>
+            </td>
+            <td>
+                <button value="." onclick="keisan(this)">.</button>
+            </td>
+            <td>
+                <button value="=" onclick="keisan(this)">=</button>
+            </td>
+            <td>
+                <button value="+" onclick="keisan(this)">+</button>
+            </td>
+        </tr>
+        </table>
+    </body>
+</html>
